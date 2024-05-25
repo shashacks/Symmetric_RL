@@ -1,0 +1,105 @@
+atari:
+  env_wrapper:
+    - stable_baselines3.common.atari_wrappers.AtariWrapper
+  # Equivalent to
+  # vec_env_wrapper:
+  #   - stable_baselines3.common.vec_env.VecFrameStack:
+  #         n_stack: 4
+  frame_stack: 4
+  policy: 'CnnPolicy'
+  n_envs: 16
+  n_timesteps: !!float 5e6
+  vf_coef: 0.25
+  policy_kwargs: "dict(optimizer_class=RMSpropTFLike, optimizer_kwargs=dict(eps=1e-5))"
+
+# HalfCheetahBulletEnv-v0: &pybullet-defaults
+#   normalize: true
+#   n_envs: 4
+#   n_timesteps: !!float 2e6
+#   policy: 'MlpPolicy'
+#   ent_coef: 0.0
+#   max_grad_norm: 0.5
+#   n_steps: 8
+#   gae_lambda: 0.9
+#   vf_coef: 0.4
+#   gamma: 0.99
+#   use_rms_prop: True
+#   normalize_advantage: False
+#   # Both works
+#   learning_rate: lin_0.00096
+#   # learning_rate: !!float 3e-4
+#   # use_sde: True
+#   policy_kwargs: "dict(log_std_init=-2, ortho_init=False)"
+
+
+Ant-v4: &mujoco-defaults
+  normalize: true
+  n_timesteps: !!float 2e6
+  policy: 'MlpPolicy'
+  n_envs: 4
+  n_steps: 8
+
+# Ant-v4:
+#   <<: *pybullet-defaults
+  
+Humanoid-v4:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 1e7
+
+HumanoidStandup-v4:
+  <<: *mujoco-defaults
+
+Walker2d-v4:
+  <<: *mujoco-defaults
+
+Hopper-v4:
+  <<: *mujoco-defaults
+
+HalfCheetah-v4:
+  <<: *mujoco-defaults
+
+Swimmer-v4:
+  <<: *mujoco-defaults
+  gamma: 0.9999
+
+InvertedDoublePendulum-v4:
+  <<: *mujoco-defaults
+
+BipedalWalker-v3:
+  <<: *mujoco-defaults
+
+# BipedalWalker-v3:
+#   normalize: true
+#   n_envs: 16
+#   n_timesteps: !!float 5e6
+#   policy: 'MlpPolicy'
+#   ent_coef: 0.0
+#   max_grad_norm: 0.5
+#   n_steps: 8
+#   gae_lambda: 0.9
+#   vf_coef: 0.4
+#   gamma: 0.99
+#   use_rms_prop: True
+#   normalize_advantage: False
+#   learning_rate: lin_0.00096
+#   # use_sde: True
+#   policy_kwargs: "dict(log_std_init=-2, ortho_init=False)"
+
+# LunarLanderContinuous-v2:
+#   normalize: true
+#   n_envs: 4
+#   n_timesteps: !!float 5e6
+#   policy: 'MlpPolicy'
+#   ent_coef: 0.0
+#   max_grad_norm: 0.5
+#   n_steps: 8
+#   gae_lambda: 0.9
+#   vf_coef: 0.4
+#   gamma: 0.99
+#   normalize_advantage: False
+#   learning_rate: lin_7e-4
+#   # use_sde: True
+#   policy_kwargs: "dict(log_std_init=-2, ortho_init=False)"
+
+LunarLanderContinuous-v2:
+  <<: *mujoco-defaults

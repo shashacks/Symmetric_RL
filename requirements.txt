@@ -1,0 +1,14 @@
+rl_zoo3==2.0.0
+swig==4.1.1
+regex
+joblib
+gymnasium==0.29.0
+gymnasium[mujoco]==0.29.0
+gymnasium[box2d]==0.29.0
+gymnasium[atari]==0.29.0
+gymnasium[accept-rom-license]==0.29.0
+seaborn==0.8.1
+opencv-python==4.8.0.74
+sb3-contrib==2.0.0
+stable-baselines3==2.1.0
+mujoco==2.3.7

@@ -1,0 +1,72 @@
+atari:
+  env_wrapper:
+    - stable_baselines3.common.atari_wrappers.AtariWrapper
+  frame_stack: 4
+  policy: 'CnnPolicy'
+  n_envs: 8
+  n_steps: 128
+  n_epochs: 4
+  batch_size: 256
+  n_timesteps: !!float 5e6
+  learning_rate: lin_2.5e-4
+  clip_range: lin_0.1
+  vf_coef: 0.5
+
+Ant-v4: &mujoco-defaults
+  normalize: true
+  n_timesteps: !!float 2e6
+  policy: 'MlpPolicy'
+
+# Humanoid-v4:
+#   <<: *mujoco-defaults
+
+Humanoid-v4:
+  normalize: true
+  n_envs: 1
+  policy: 'MlpPolicy'
+  n_timesteps: !!float 1e7
+  batch_size: 256
+  n_steps: 512
+  gamma: 0.95
+  learning_rate: 3.5e-05
+  ent_coef: 0.002
+  clip_range: 0.3
+  n_epochs: 5
+  policy_kwargs: "dict(
+                    log_std_init=-2,
+                    ortho_init=False,
+                    activation_fn=nn.ReLU,
+                    net_arch=dict(pi=[256, 256], vf=[256, 256])
+                  )"
+
+HumanoidStandup-v4:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 1e7
+
+HumanoidBulletEnv-v0:
+  normalize: true
+  n_envs: 8
+  n_timesteps: !!float 1e7
+  policy: 'MlpPolicy'
+
+Walker2d-v4:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 5e6
+
+Hopper-v4:
+  <<: *mujoco-defaults
+
+HalfCheetah-v4:
+  <<: *mujoco-defaults
+
+Swimmer-v4:
+  <<: *mujoco-defaults
+
+InvertedDoublePendulum-v4:
+  <<: *mujoco-defaults
+
+BipedalWalker-v3:
+  <<: *mujoco-defaults
+
+LunarLanderContinuous-v2:
+  <<: *mujoco-defaults
